@@ -24,16 +24,50 @@
       width: max-content;
       margin-left: auto;
       margin-right: auto;
-      color: #dae2e9;
     }
-    #header h1 {
+    #header h1,h2 {
+      color: #dae2e9;
       text-align: center;
       text-shadow:0 0 9px #dae2e9;
     }
 
     #main-box {
+      position: relative;
       margin: auto;
+      text-align: center;
     }
+
+    .greeting {
+      color: #dae2e9;
+      border: 1px solid #dae2e9 ;
+      margin: 1rem auto;
+      border-radius: 5px;
+    }
+
+    .gInput {
+      width: 300px;
+      height: 80px;
+      background-color: #dae2e9;
+      border-radius: 5px;
+      border: 0px;
+      box-shadow: 0 0 20px 7px #87abca ;
+    }
+
+    .rdbtn {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 96px;
+      min-width: 65px;
+      height: 30px;
+      margin: 10px;
+      color: #305b7e;
+      background-color: #dae2e9;
+      box-shadow: 0 0 20px 7px #87abca ;
+      border: 0px;
+    }
+
     /* move bar */
 
     .movebar {
@@ -107,6 +141,17 @@
   <div id="header"><h1> The Bible of Henry</h1></div>
   <div id="main-box" >
     <div id="app">
+      <div id="greeting" class="greeting">
+        <h2>問候語生成器</h2>
+        <textarea type="text"  class="gInput" :value="greeting"></textarea>
+        <div>
+          <input type="radio" id="morning" value="早上好！" v-model="daytime" />
+          <label for="morning">早安</label>
+          <input type="radio" id="night" value="晚安！" v-model="daytime" />
+          <label for="night">晚安</label>
+          <button class="rdbtn" @click="getGreeting()">生成</button>
+        </div>
+      </div>
       <div id="movebarR" class="movebar"> 
         <div class="wordcloud" 
         v-for="(sentence, index) in sentences" 
@@ -149,6 +194,22 @@
             {id:'010', content:'呜呜呜'},
             {id:'011', content:'😭'},
           ],
+
+          prefice:[
+            '至高無上的家藝·亨利一世·蘇',
+            '僕人們光輝的太陽',
+            'subo猛男的完美情人',
+            'ICC區塊鏈穩健型操盤手',
+            '世襲制川沙公爵',
+            '稀世的貴族資本家',
+            '鉄帽子王蘇親王',
+            '实践家型的伟人',
+            '城堡的偉大領導者',
+            '特斯拉最高選配擁有者',
+            '追求卓越的加班領軍人',
+          ],
+          daytime: '',
+          greeting:'',
           isCopied: false
         }
       },
@@ -168,6 +229,15 @@
           alert(s + ' is copied!');
           this.isCopied = true
         },
+
+        getGreeting(){
+          randomGreets = _.shuffle(this.prefice)
+          .slice(0,4)
+          .join('，');
+
+          const greeting = randomGreets + '，🈹🈹' + this.daytime;
+          this.greeting = greeting;
+        }
       }
 
     }).mount('#app')
