@@ -150,6 +150,8 @@
           <label for="morning">早安</label>
           <input type="radio" id="night" value="晚安！" v-model="daytime" />
           <label for="night">晚安</label>
+          <input type="checkbox" id="crypto" v-model="isCrypto" />
+          <label for="crypto">幣圈風雲</label>
           <button class="rdbtn" @click="getGreeting()">生成</button>
         </div>
       </div>
@@ -209,9 +211,12 @@
             '特斯拉最高選配擁有者',
             '追求卓越的加班領軍人',
           ],
+          cryptoGreet:'🥇天才操盘手苏家艺真金白银team内唯一个人净值过万亿只赚真钱不吹假币💵断层领跑不捆绑top line💕九亿苏北猛男的梦中情🈹金牌经济讲师笑颜迷人🤭币圈唯一小恐龙🦖',
           daytime: '',
           greeting:'',
-          isCopied: false
+          isCopied: false,
+          isCrypto: '',
+
         }
       },
       
@@ -232,12 +237,16 @@
         },
 
         getGreeting(){
+          if (this.isCrypto === !true){
           randomGreets = _.shuffle(this.prefice)
           .slice(0,4)
           .join('，');
-
           const greeting = randomGreets + '，🈹🈹' + this.daytime;
           this.greeting = greeting;
+          }else{
+            this.greeting = this.cryptoGreet + this.daytime;
+
+          }
         }
       }
 
