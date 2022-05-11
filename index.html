@@ -71,11 +71,11 @@
     /* move bar */
 
     .movebar {
-      animation: slidein 200s linear infinite alternate;
+      animation: slidein 110s linear infinite alternate;
       width: max-content;
     }
     .movebarL {
-      animation: slideinL 190s linear infinite alternate;
+      animation: slideinL 90s linear infinite alternate;
       width: max-content;
     }
     
@@ -83,7 +83,7 @@
     
     @keyframes slidein {
       from {
-        transform:translateX(30%);
+        transform:translateX(10%);
       }
 
       to {
@@ -120,6 +120,28 @@
     }
 
     .wordcloud:hover {
+      cursor: pointer;
+      box-shadow: 0 0 20px 7px #b9cee0 ;
+      transform: scale(1.3);
+      z-index: 1;
+    }
+    .wordcloudgold {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 96px;
+      padding: 0 8px;
+      min-width: 160px;
+      height: 65px;
+      margin: 10px;
+      color: #6b6213;
+      background-color: #fce045;
+      box-shadow: 0 0 20px 7px #f8eba2 ;
+      transition-duration: 500ms;
+    }
+
+    .wordcloudgold:hover {
       cursor: pointer;
       box-shadow: 0 0 20px 7px #b9cee0 ;
       transform: scale(1.3);
@@ -172,6 +194,15 @@
           <span :class="{copied: isCopied}">{{sentence.content}}</span>
         </div>
       </div>
+
+      <div id="movebarR" class="movebar"> 
+        <div class="wordcloudgold" 
+        v-for="(sentence, index) in cryptoSentence" 
+        :key="sentence.id"
+        @click='copyThis(sentence.content)'>
+          <span>{{sentence.content}}</span>
+        </div>
+      </div>
     </div>
 	</div>
 
@@ -212,6 +243,16 @@
             '追求卓越的加班領軍人',
           ],
           cryptoGreet:'🥇天才操盘手苏家艺真金白银team内唯一个人净值过万亿只赚真钱不吹假币💵断层领跑不捆绑top line💕九亿苏北猛男的梦中情🈹金牌经济讲师笑颜迷人🤭币圈唯一小恐龙🦖',
+          cryptoSentence: [
+            {id:'001', content:'#真金白銀蘇家藝#'},
+            {id:'002', content:'#蘇北夢情蘇家藝#'},
+            {id:'003', content:'#蘇家藝幣圈唯一TOP#'},
+            {id:'004', content:'#幣圈小恐龍蘇家藝#'},
+            {id:'005', content:'#净值萬億蘇家藝#'},
+            {id:'006', content:'#斷層領跑蘇家藝#'},
+            {id:'007', content:'#金牌導師蘇家藝#'},
+            {id:'008', content:'#金牌導師蘇家藝#'},
+          ],
           daytime: '',
           greeting:'',
           isCopied: false,
